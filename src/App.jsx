@@ -83,13 +83,19 @@ function App() {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    win.forEach((e, i) => {
+    const dontWin = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    win.forEach((e) => {
       const [a, b, c] = e;
       if (arrX.includes(a) && arrX.includes(b) && arrX.includes(c)) {
         setGameOver("❌ - Won")
-      }
-      if (arr0.includes(a) && arr0.includes(b) && arr0.includes(c)) {
+      } else if (arr0.includes(a) && arr0.includes(b) && arr0.includes(c)) {
         setGameOver("⭕️ - Won")
+      } else {
+        dontWin.forEach((i) => {
+          if (arrX.includes(i) && arr0.includes(i)) {
+            setGameOver("❌ & ⭕️ - Draw")
+          }
+        })
       }
     })
   }, 0)
@@ -97,7 +103,7 @@ function App() {
     <>
       <div className="text-center">
         <h1 className="text-light-500 font-bold text-center text-[30px] block pt-50px">{gameOver ? gameOver : "Tic-Tac-Toe Game"}</h1>
-        <button className="text-light-500 font-bold text-center text-[20px] uppercase px-[15px] py-[10px] mt-5 border-[2px] border-[#b4b8ab] rounded-[50em] disabled:cursor-default disabled:text-transparent disabled:border-transparent" disabled={!gameOver} onClick={() => window.location.reload()}>restart</button>
+        <button className="text-light-500 font-bold text-center text-[20px] uppercase px-[15px] py-[10px] mt-5 border-[2px] border-[#b4b8ab] rounded-[50em]" onClick={() => window.location.reload()}>restart</button>
       </div>
       <div className="container mx-auto w-full mt-20px flex items-center justify-center">
         <div className="box w-[300px] h-[300px] flex-wrap flex items-center mx-auto">
